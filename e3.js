@@ -130,4 +130,21 @@ function descargarArchivo(url, callback) {
     }, 1500); }
 const notificarDescargaCompleta = (url) => {
     console.log(`Descarga completa de ${url}`);
-};    
+};
+function potencia(base, exponente) {
+    if (exponente === 0) {
+        return 1;
+    }
+    if (exponente < 0) {
+        return 1 / potencia(base, -exponente);
+    }
+    return base * potencia(base, exponente - 1);
+}
+function crearSecuencia(inicio, paso) {
+    let valorActual = inicio; 
+    return function() {
+        const resultado = valorActual;
+        valorActual += paso;
+        return resultado;
+    };
+}    
