@@ -50,16 +50,84 @@ function procesarTexto(texto){
     
     return (textoLimpio)+"  "+(cantidadPalabras);
 }
-function operacionMatematica(){
-    let resultado=0;
-    const suma = (a,b) => a+b;
-    const resta = (a,b) => a-b;
-    const multiplicacion = (a,b) => a*b;
-    const division = (a,b) => a/b;
-return {
-    sumar,
-    restar,
-    multiplicar,
-    dividir,
-  };
-};
+function operacionesMatematicas() {
+    const sumar = (a, b) => a + b;
+    const restar = (a, b) => a - b;
+    const multiplicar = (a, b) => a * b;
+    const dividir = (a, b) => {
+        if (b === 0) {
+            return "Error: División por cero";
+        }
+        return a / b;
+    };
+    return {
+        sumar,
+        restar,
+        multiplicar,
+        dividir
+    };
+}
+function crearContador(valorInicial = 0) {
+    let contador = valorInicial; 
+    return {
+        incrementar: () => {
+            contador++;
+            return contador;
+        },
+        resetear: () => {
+            contador = valorInicial;
+            return contador;
+        },
+        obtenerValor: () => contador 
+    };
+}
+function crearAcumulador(valorInicial) {
+    let acumulador = valorInicial; 
+    return function(nuevoValor) {
+        acumulador += nuevoValor;
+        return acumulador;
+    };
+}
+function saludo(nombre = "Amigo") {
+    return `¡Hola, ${nombre}! Que tengas un buen día.`;
+}
+function media(...numeros) {
+    if (numeros.length === 0) {
+        return 0;
+    }
+    const suma = numeros.reduce((acc, current) => acc + current, 0);
+    return suma / numeros.length;
+}
+function mostrarDatos(nombre, edad, ...hobbies) {
+    let mensaje = `Nombre: ${nombre}, Edad: ${edad}`;
+    if (hobbies.length > 0) {
+        mensaje += `, Hobbies: ${hobbies.join(', ')}`;
+    } else {
+        mensaje += ', Sin Hobbies registrados.';
+    }
+    console.log(mensaje);
+}
+function ejecutarOperacion(fn, x, y) {
+    if (typeof fn !== 'function') {
+        return "Error: El primer argumento debe ser una función.";
+    }
+    return fn(x, y);
+}
+function filtrarArreglo(arr, callback) {
+    const resultado = [];
+    for (const elemento of arr) {
+        if (callback(elemento)) {
+            resultado.push(elemento);
+        }
+    }
+    return resultado;
+}
+function descargarArchivo(url, callback) {
+    console.log(`Descargando... (${url})`);
+    setTimeout(() => {
+
+        callback(url);
+    }, 1500); }
+const notificarDescargaCompleta = (url) => {
+    console.log(`Descarga completa de ${url}`);
+};    
